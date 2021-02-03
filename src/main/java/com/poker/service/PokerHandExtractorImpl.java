@@ -34,9 +34,6 @@ public class PokerHandExtractorImpl implements PokerHandExtractor {
 
     String[] cardStrings = pokerHandStr.toUpperCase().split(StringUtils.SPACE);
 
-    // todo validate all cardStrings are of length 2, can be length of 3 when it's 10
-    // todo make sure ranks are valid, test has rank of "T" which doesn't exist
-
     return Arrays.stream(cardStrings).map(this::convertStr2Card).collect(Collectors.toList());
   }
 
