@@ -4,7 +4,6 @@ import com.poker.model.EvalResult;
 import com.poker.model.PokerHandInfo;
 
 /**
-
  * @author enderdincer
  */
 public interface EvalResultHandler {

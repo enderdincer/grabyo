@@ -3,6 +3,7 @@ package com.poker.common;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.Supplier;
 
 /**
@@ -32,6 +33,19 @@ public final class CollectionUtils {
       return null;
     }
     L list = listSupplier.get();
+
+    for (Object value : values) {
+      list.add((T) value);
+    }
+
+    return list;
+  }
+
+  public static <T, S extends Set<T>> S setOf(Supplier<S> setSupplier, Object... values) {
+    if (Objects.isNull(values)) {
+      return null;
+    }
+    S list = setSupplier.get();
 
     for (Object value : values) {
       list.add((T) value);

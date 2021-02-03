@@ -16,6 +16,7 @@ import static com.poker.common.CardUtils.*;
 
 /**
  * Provides a better, more usable way for the cards in hand.
+ *
  * @author enderdincer
  */
 @Slf4j
@@ -23,13 +24,12 @@ import static com.poker.common.CardUtils.*;
 @RequiredArgsConstructor
 public class PokerHandExtractorImpl implements PokerHandExtractor {
 
-
   @Override
   public List<Card> extract(String pokerHandStr) {
 
     if (Objects.isNull(pokerHandStr) || pokerHandStr.isEmpty()) {
       log.debug("Poker hand not valid {}: ", pokerHandStr);
-      return Collections.emptyList();
+      throw new IllegalArgumentException("Poker hand string is either null or empty");
     }
 
     String[] cardStrings = pokerHandStr.toUpperCase().split(StringUtils.SPACE);
@@ -40,17 +40,28 @@ public class PokerHandExtractorImpl implements PokerHandExtractor {
     return Arrays.stream(cardStrings).map(this::convertStr2Card).collect(Collectors.toList());
   }
 
+  /**
+   * Parses string pieces to Card object.
+   *
+   * @param cardStr
+   * @return
+   */
   private Card convertStr2Card(String cardStr) {
 
     String rankStr;
     String suitStr;
 
     if (cardStr.length() == 3) {
-      rankStr = cardStr.substring(0, 2);
-      suitStr = cardStr.substring(2);
+      rankStr = cardStr.substring(0, 2).toUpperCase();
+      suitStr = cardStr.substring(2).toUpperCase();
     } else {
-      rankStr = cardStr.substring(0, 1);
-      suitStr = cardStr.substring(1);
+      rankStr = cardStr.substring(0, 1).toUpperCase();
+      suitStr = cardStr.substring(1).toUpperCase();
+    }
+
+    if(!SUITS.contains(suitStr)){
+      log.debug("Unknown suit type detected: {}", suitStr);
+      throw new IllegalArgumentException("Unknown suit type");
     }
 
     Card.CardBuilder cardBuilder =
@@ -67,11 +78,22 @@ public class PokerHandExtractorImpl implements PokerHandExtractor {
     return cardBuilder.build();
   }
 
+  /**
+   * Parses rank from rank string
+   * @param rankStr
+   * @return
+   */
   private int getRankValue(String rankStr) {
     // if alpha numeric then simply parse to int
     if (NumberUtils.isCreatable(rankStr)) {
       return Integer.parseInt(rankStr);
     }
+
+    if(!RANK_LOOK_UP.containsKey(rankStr)){
+      log.debug("Unknown rank detected: {}", rankStr);
+      throw new IllegalArgumentException("Unknown rank type");
+    }
+
     // use look up otherwise
     return RANK_LOOK_UP.get(rankStr);
   }

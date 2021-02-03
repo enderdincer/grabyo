@@ -1,21 +1,23 @@
 package com.poker.service;
 
 import com.poker.PokerHand;
+import com.poker.exception.IdenticalHandException;
 import com.poker.model.Card;
 import com.poker.model.PokerHandInfo;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 /**
- *
- * Compares player hands depending on the PokerHandType
- * AND tie breakers if needed
+ * Compares player hands depending on the PokerHandType AND tie breakers if needed
  *
  * @author enderdincer
  */
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class PokerHandComparatorImpl implements PokerHandComparator {
@@ -25,16 +27,19 @@ public class PokerHandComparatorImpl implements PokerHandComparator {
 
   @Override
   public PokerHand.Result compareAll(PokerHand... pokerHands) {
+    if (Objects.isNull(pokerHands) || pokerHands.length == 0) {}
+
+    PokerHand playerPokerHand = pokerHands[0];
     return null;
-//    return Stream.of(pokerHands).reduce((pokerHand1, pokerHand2) -> {
-//      this.compare(pokerHand1, pokerHand2);
-//              return pokerHand1;
-//    }).get();
+    //    return Stream.of(pokerHands).reduce((pokerHand1, pokerHand2) -> {
+    //      this.compare(pokerHand1, pokerHand2);
+    //              return pokerHand1;
+    //    }).get();
   }
 
   /**
-   * Converts PokerHand to List of Cards.
-   * Gets PokerHandInfo to compare player hands by using list of cards.
+   * Converts PokerHand to List of Cards. Gets PokerHandInfo to compare player hands by using list
+   * of cards.
    *
    * @param playerHand results are based on this. if wins the result is a win.
    * @param opponentHand
@@ -42,6 +47,11 @@ public class PokerHandComparatorImpl implements PokerHandComparator {
    */
   @Override
   public PokerHand.Result compare(PokerHand playerHand, PokerHand opponentHand) {
+
+    if(playerHand.getHand().equals(opponentHand.getHand())){
+      log.debug("Identical hands detected.");
+      throw new IdenticalHandException("Players cannot have identical hands.");
+    }
 
     List<Card> playerCards = pokerHandExtractor.extract(playerHand);
     List<Card> opponentCards = pokerHandExtractor.extract(opponentHand);
@@ -53,8 +63,8 @@ public class PokerHandComparatorImpl implements PokerHandComparator {
   }
 
   /**
-   * Simple comparison based PokerHandType hierarchy.
-   * Calls getTieBreakerResult if hierarchies are equal.
+   * Simple comparison based PokerHandType hierarchy. Calls getTieBreakerResult if hierarchies are
+   * equal.
    *
    * @param playerHandInfo
    * @param opponentHandInfo
@@ -77,8 +87,7 @@ public class PokerHandComparatorImpl implements PokerHandComparator {
   }
 
   /**
-   * Iterates and compares tie breakers.
-   * If tie is not broken after the iteration returns tie.
+   * Iterates and compares tie breakers. If tie is not broken after the iteration returns tie.
    *
    * @param playerHandInfo
    * @param opponentHandInfo

@@ -9,7 +9,9 @@ import java.util.*;
  *
  * @author enderdincer
  */
-public class CardUtils {
+public final class CardUtils {
+
+  private CardUtils() {}
 
   public static final String ACE = "A";
   public static final int ACE_HIGH_VAL = 14;
@@ -35,6 +37,14 @@ public class CardUtils {
   public static final Map<String, Integer> RANK_LOOK_UP =
       CollectionUtils.mapOf(
           HashMap::new, JACK, JACK_VAL, QUEEN, QUEEN_VAL, KING, KING_VAL, ACE, ACE_HIGH_VAL);
+
+  public static final String SPADES = "S";
+  public static final String DIAMONDS = "D";
+  public static final String CLUBS = "C";
+  public static final String HEARTS = "H";
+
+  public static final Set<String> SUITS =
+      CollectionUtils.setOf(HashSet::new, SPADES, DIAMONDS, CLUBS, HEARTS);
 
   public static boolean hasAce(List<Card> cards) {
     return cards.stream().anyMatch(card -> isAce(card.getRankStr()));

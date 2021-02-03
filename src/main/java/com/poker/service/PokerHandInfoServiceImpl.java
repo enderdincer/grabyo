@@ -10,10 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- *
- * @author enderdincer
- */
+/** @author enderdincer */
 @Service
 @RequiredArgsConstructor
 public class PokerHandInfoServiceImpl implements PokerHandInfoService {
@@ -21,6 +18,12 @@ public class PokerHandInfoServiceImpl implements PokerHandInfoService {
   private final PokerHandEvaluator pokerHandEvaluator;
   private final EvalResultHandlerFactory evalResultHandlerFactory;
 
+  /**
+   * Builds final form of data before cards are compared.
+   *
+   * @param cards list of cards, players hand
+   * @return
+   */
   @Override
   public PokerHandInfo getHandInfo(List<Card> cards) {
     EvalResult handEvalResult = pokerHandEvaluator.evaluate(cards);

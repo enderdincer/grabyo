@@ -5,7 +5,8 @@ import com.poker.model.PokerHandInfo;
 
 import java.util.List;
 
+/** @author enderdincer */
 public interface PokerHandInfoService {
 
-    PokerHandInfo getHandInfo(List<Card> cards);
+  PokerHandInfo getHandInfo(List<Card> cards);
 }

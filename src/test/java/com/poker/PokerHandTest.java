@@ -9,10 +9,10 @@ import com.poker.PokerHand.Result;
 /** Unit test for simple App. */
 public class PokerHandTest {
 
-  //	@Test (expected = IllegalArgumentException.class)
-  //	public void newHandTestNull() {
-  //		new PokerHand(null);
-  //	}
+  	@Test (expected = IllegalArgumentException.class)
+  	public void newHandTestNull() {
+  		new PokerHand(null);
+  	}
 
   /** Expected: Highest ranked card wins */
   @Test
