@@ -8,6 +8,4 @@ import com.poker.PokerHand;
 public interface PokerHandComparator {
 
     PokerHand.Result compare(PokerHand playerHand, PokerHand opponentHand);
-
-    PokerHand.Result compareAll(PokerHand... pokerHands);
 }

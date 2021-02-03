@@ -25,18 +25,6 @@ public class PokerHandComparatorImpl implements PokerHandComparator {
   private final PokerHandExtractor pokerHandExtractor;
   private final PokerHandInfoService pokerHandInfoService;
 
-  @Override
-  public PokerHand.Result compareAll(PokerHand... pokerHands) {
-    if (Objects.isNull(pokerHands) || pokerHands.length == 0) {}
-
-    PokerHand playerPokerHand = pokerHands[0];
-    return null;
-    //    return Stream.of(pokerHands).reduce((pokerHand1, pokerHand2) -> {
-    //      this.compare(pokerHand1, pokerHand2);
-    //              return pokerHand1;
-    //    }).get();
-  }
-
   /**
    * Converts PokerHand to List of Cards. Gets PokerHandInfo to compare player hands by using list
    * of cards.
@@ -48,7 +36,7 @@ public class PokerHandComparatorImpl implements PokerHandComparator {
   @Override
   public PokerHand.Result compare(PokerHand playerHand, PokerHand opponentHand) {
 
-    if(playerHand.getHand().equals(opponentHand.getHand())){
+    if (playerHand.getHand().equals(opponentHand.getHand())) {
       log.debug("Identical hands detected.");
       throw new IdenticalHandException("Players cannot have identical hands.");
     }
