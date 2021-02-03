@@ -25,13 +25,13 @@ public class PokerHandTest {
 
     // without ACE
     PokerHand hand3 = new PokerHand("10c 2s 5h Jh 7c");
-    PokerHand hand4 = new PokerHand("7s 2h 3c 5d 6d");
+    PokerHand hand4 = new PokerHand("7s 2h 3c 5D 6d");
 
     assertEquals(Result.WIN, hand3.compareWith(hand4));
     assertEquals(Result.LOSS, hand4.compareWith(hand3));
 
     // high card win with tie breaker
-    PokerHand hand5 = new PokerHand("10s Jh 7c 5d 3d");
+    PokerHand hand5 = new PokerHand("10s Jh 7C 5d 3d");
     PokerHand hand6 = new PokerHand("10c Js 7h 4h 2c");
 
     assertEquals(Result.WIN, hand5.compareWith(hand6));
@@ -40,7 +40,7 @@ public class PokerHandTest {
 
   @Test
   public void onePairWin() {
-    PokerHand onePairHand = new PokerHand("Js Jh 3c 5d 7d");
+    PokerHand onePairHand = new PokerHand("Js JH 3c 5d 7d");
     PokerHand highCardOnlyHand = new PokerHand("Ac 2s 5h Jh 7c");
 
     assertEquals(Result.WIN, onePairHand.compareWith(highCardOnlyHand));
