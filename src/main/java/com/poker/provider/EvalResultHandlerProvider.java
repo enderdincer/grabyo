@@ -1,4 +1,4 @@
-package com.poker.factory;
+package com.poker.provider;
 
 import com.poker.model.EvalResult;
 import com.poker.service.eval.EvalResultHandler;
@@ -11,14 +11,14 @@ import org.springframework.stereotype.Component;
  * @author enderdincer
  */
 @Component
-public class EvalResultHandlerFactory {
+public class EvalResultHandlerProvider {
 
   private final EvalResultHandler flushHandler;
   private final EvalResultHandler straightHandler;
   private final EvalResultHandler rankGroupsHandler;
   private final EvalResultHandler highCardHandler;
 
-  public EvalResultHandlerFactory(
+  public EvalResultHandlerProvider(
       @Qualifier("flushEvalResultHandler") EvalResultHandler flushHandler,
       @Qualifier("straightEvalResultHandler") EvalResultHandler straightHandler,
       @Qualifier("rankGroupsEvalResultHandler") EvalResultHandler rankGroupsHandler,

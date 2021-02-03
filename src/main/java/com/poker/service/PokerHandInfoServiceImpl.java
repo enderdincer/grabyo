@@ -1,6 +1,6 @@
 package com.poker.service;
 
-import com.poker.factory.EvalResultHandlerFactory;
+import com.poker.provider.EvalResultHandlerProvider;
 import com.poker.model.Card;
 import com.poker.model.EvalResult;
 import com.poker.model.PokerHandInfo;
@@ -16,7 +16,7 @@ import java.util.List;
 public class PokerHandInfoServiceImpl implements PokerHandInfoService {
 
   private final PokerHandEvaluator pokerHandEvaluator;
-  private final EvalResultHandlerFactory evalResultHandlerFactory;
+  private final EvalResultHandlerProvider evalResultHandlerProvider;
 
   /**
    * Builds final form of data before cards are compared.
@@ -28,7 +28,7 @@ public class PokerHandInfoServiceImpl implements PokerHandInfoService {
   public PokerHandInfo getHandInfo(List<Card> cards) {
     EvalResult handEvalResult = pokerHandEvaluator.evaluate(cards);
 
-    EvalResultHandler handler = evalResultHandlerFactory.get(handEvalResult);
+    EvalResultHandler handler = evalResultHandlerProvider.get(handEvalResult);
 
     return handler.handle(handEvalResult);
   }
