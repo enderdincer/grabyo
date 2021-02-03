@@ -2,6 +2,8 @@
 
 ### Solution is based on the following Texas Hold'em Poker rules
 
+Source: https://www.instructables.com/Learn-To-Play-Poker---Texas-Hold-Em-aka-Texas-Ho/
+
 Hand Rankings
 A hand always consist of five cards. Individual cards are "ranked" as follows (high-to-low): A, K, Q, J, 10, 9, 8, 7, 6, 5, 4, 3, 2. ACE can be low, but only when part of an A-2-3-4-5 straight. Suits (Club, Diamond, Heart, Spade) have no value, so if two players have hands that are identical except for suit, then they are tied. A "Kicker" card is a high card used to break ties between hands of the same rank (ex. 2 players with "Four of a Kind", 3 K's on the board. P1 has K, 9 and P2 has K, 6. P1 with K, 9 wins with the "9 Kicker".)
 
@@ -27,5 +29,5 @@ One Pair- Two cards of the same rank, plus Three unmatched cards. High pair wins
     
 High Card- One card high, plus four unmatched lower ranking cards. Ace is the Highest card. Kicker breaks ties. 1 in 1
 
-Source: https://www.instructables.com/Learn-To-Play-Poker---Texas-Hold-Em-aka-Texas-Ho/
+
     
